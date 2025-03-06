@@ -16,6 +16,18 @@ class K3Controller extends Controller
         return view('k3.index', compact('data'));
     }
 
+    public function dashboard()
+    {
+        $data = K3::latest()->first();
+
+        return view('k3.dashboard', compact('data'));
+    }
+    public function kebijakan()
+    {
+
+        return view('k3.kebijakan');
+    }
+
     public function admin()
     {
         $data = K3::latest()->first();

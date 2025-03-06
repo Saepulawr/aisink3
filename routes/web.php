@@ -19,9 +19,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/', [K3Controller::class, 'index']);
-Route::get('/dashboard', [K3Controller::class, 'index'])->name("dashboard");
 
+Route::get('/', [K3Controller::class, 'dashboard']);
+Route::get('/dashboard', [K3Controller::class, 'dashboard'])->name("dashboard");
+Route::get('/kebijakan', [K3Controller::class, 'kebijakan'])->name("kebijakan");
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [K3Controller::class, 'admin'])->name('admin');
