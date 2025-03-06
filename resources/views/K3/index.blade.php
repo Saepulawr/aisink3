@@ -143,27 +143,33 @@
 
         <!-- INFO UTAMA -->
         <div class="info">
-            <span class="bold">DATE : <span class="box">{{ $date }}</span></span>
-            <span class="bold">ACCIDENT INFORMATION FY : <span class="box">{{ $year }}</span></span>
+            <span class="bold">DATE : <span class="box" id="date">{{ $date }}</span></span>
+            <span class="bold">ACCIDENT INFORMATION FY : <span class="box"
+                    id="year">{{ $year }}</span></span>
         </div>
 
         <!-- TABEL KECELAKAAN -->
         <table>
             <tr>
                 <td class="bold">LABOUR ACCIDENT</td>
-                <td><span class="box">{{ sprintf('%0' . $digit . 'd', $data->labour_accident) }}</span> CASE</td>
+                <td><span class="box"
+                        id="labour_accident">{{ sprintf('%0' . $digit . 'd', $data->labour_accident) }}</span> CASE</td>
                 <td class="bold">NEAR MISS</td>
-                <td><span class="box">{{ sprintf('%0' . $digit . 'd', $data->near_miss) }}</span> CASE</td>
+                <td><span class="box" id="near_miss">{{ sprintf('%0' . $digit . 'd', $data->near_miss) }}</span> CASE
+                </td>
             </tr>
             <tr>
                 <td class="bold">SMALL ACCIDENT</td>
-                <td><span class="box">{{ sprintf('%0' . $digit . 'd', $data->small_accident) }}</span> CASE</td>
+                <td><span class="box"
+                        id="small_accident">{{ sprintf('%0' . $digit . 'd', $data->small_accident) }}</span> CASE</td>
                 <td class="bold">PAK</td>
-                <td><span class="box">{{ sprintf('%0' . $digit . 'd', $data->pak) }}</span> CASE</td>
+                <td><span class="box" id="pak">{{ sprintf('%0' . $digit . 'd', $data->pak) }}</span> CASE</td>
             </tr>
             <tr>
                 <td class="bold">TRAFFIC ACCIDENT</td>
-                <td><span class="box">{{ sprintf('%0' . $digit . 'd', $data->traffic_accident) }}</span> CASE</td>
+                <td><span class="box"
+                        id="traffic_accident">{{ sprintf('%0' . $digit . 'd', $data->traffic_accident) }}</span> CASE
+                </td>
                 <td colspan="2"></td>
             </tr>
         </table>
@@ -173,21 +179,24 @@
         <table>
             <tr>
                 <td class="bold">JUMLAH PEKERJA BULAN INI</td>
-                <td><span class="box">{{ sprintf('%0' . $digit . 'd', $data->jumlah_pekerja) }}</span> MP</td>
+                <td><span class="box"
+                        id="jumlah_pekerja">{{ sprintf('%0' . $digit . 'd', $data->jumlah_pekerja) }}</span> MP</td>
             </tr>
             <tr>
                 <td class="bold">JUMLAH JAM KERJA AMAN TANPA KECELAKAAN (LTA)</td>
-                <td><span class="box">{{ sprintf('%0' . $digit . 'd', $data->jam_kerja_aman) }}</span> JAM</td>
+                <td><span class="box"
+                        id="jam_kerja_aman">{{ sprintf('%0' . $digit . 'd', $data->jam_kerja_aman) }}</span> JAM</td>
             </tr>
             <tr>
                 <td class="bold">JUMLAH HARI KERJA AMAN TANPA KECELAKAAN (LTA)</td>
-                <td><span class="box">{{ sprintf('%0' . $digit . 'd', $data->hari_kerja_aman) }}</span> HARI</td>
+                <td><span class="box"
+                        id="hari_kerja_aman">{{ sprintf('%0' . $digit . 'd', $data->hari_kerja_aman) }}</span> HARI</td>
             </tr>
         </table>
 
         <!-- RUNNING TEXT -->
         <div class="running-text">
-            <span>{{ $data->running_text }}</span>
+            <span id="running_text">{{ $data->running_text }}</span>
         </div>
     </div>
 </body>
@@ -196,6 +205,34 @@
     // setTimeout(() => {
     //     window.location.assign("kebijakan.html");
     // }, 20000);
+</script>
+<script>
+    function fetchData() {
+        fetch('/api/k3')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("date").innerText = data.date_formated;
+                document.getElementById("year").innerText = data.year;
+                document.getElementById("labour_accident").innerText = data.labour_accident.toString().padStart(4,
+                    '0');
+                document.getElementById("small_accident").innerText = data.small_accident.toString().padStart(4,
+                    '0');
+                document.getElementById("traffic_accident").innerText = data.traffic_accident.toString().padStart(4,
+                    '0');
+                document.getElementById("near_miss").innerText = data.near_miss.toString().padStart(4, '0');
+                document.getElementById("pak").innerText = data.pak.toString().padStart(4, '0');
+                document.getElementById("jumlah_pekerja").innerText = data.jumlah_pekerja.toString().padStart(4,
+                    '0');
+                document.getElementById("jam_kerja_aman").innerText = data.jam_kerja_aman.toString().padStart(4,
+                    '0');
+                document.getElementById("hari_kerja_aman").innerText = data.hari_kerja_aman.toString().padStart(4,
+                    '0');
+                document.getElementById("running_text").innerText = data.running_text;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    setInterval(fetchData, 1000); // Ambil data setiap 1 detik
 </script>
 
 </html>
