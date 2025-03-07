@@ -152,7 +152,7 @@
 
 <script>
     setTimeout(() => {
-        // window.location.assign("{{ route('dashboard') }}");
+        window.location.assign("{{ route('dashboard') }}");
     }, 20000); // 20 detik
 </script>
 
