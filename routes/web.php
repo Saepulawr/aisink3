@@ -24,10 +24,10 @@ Route::get('/', [K3Controller::class, 'dashboard']);
 Route::get('/dashboard', [K3Controller::class, 'dashboard'])->name("dashboard");
 Route::get('/kebijakan', [K3Controller::class, 'kebijakan'])->name("kebijakan");
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', [K3Controller::class, 'admin'])->name('admin');
-    Route::post('/update', [K3Controller::class, 'update'])->name('admin.update');
-});
+// Route::middleware(['auth'])->group(function () {
+Route::get('/admin', [K3Controller::class, 'admin'])->name('admin');
+Route::post('/update', [K3Controller::class, 'update'])->name('admin.update');
+// });
 Route::get('/api/k3', function () {
     $data = K3::latest()->first();
     return response()->json($data->toArray() + [
