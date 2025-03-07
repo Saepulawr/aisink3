@@ -11,57 +11,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Papan Informasi K3</title>
     <style>
-        body,
-        html {
-            height: 100%;
-            width: 100%;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            width: 100vw;
+            height: 100vh;
+            background-color: #f8f5d7;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f8f5d7;
-            overflow: hidden;
         }
 
         .wrapper {
-            transform-origin: center;
-            transition: transform 0.3s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
         }
 
-
         .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 3px solid black;
+            width: 100vw;
+            height: 100vh;
+            max-width: 3840px;
+            max-height: 2160px;
+            padding: 30px;
+            border: 4px solid black;
             background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform-origin: center;
         }
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
 
         .header img {
-            width: 150px;
+            width: 12vw;
             height: auto;
         }
 
         h1 {
             text-align: center;
-            font-size: 32px;
+            font-size: 3vw;
             font-weight: bold;
-            margin-bottom: 10px;
         }
 
         .info {
             display: flex;
             justify-content: space-between;
-            font-size: 18px;
-            margin: 10px 0;
+            font-size: 2vw;
+            width: 100%;
+            margin: 20px 0;
         }
 
         .bold {
@@ -71,26 +84,26 @@
         .box {
             background-color: black;
             color: red;
-            padding: 5px 15px;
+            padding: 10px 20px;
             display: inline-block;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 10px;
             text-align: center;
-            min-width: 60px;
+            min-width: 80px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         th,
         td {
-            border: 2px solid black;
-            padding: 10px;
+            border: 3px solid black;
+            padding: 20px;
             text-align: center;
-            font-size: 18px;
+            font-size: 2vw;
         }
 
         th {
@@ -98,28 +111,26 @@
         }
 
         .section-title {
-            font-size: 20px;
+            font-size: 2.5vw;
             font-weight: bold;
-            margin: 20px 0 10px;
+            margin: 40px 0 20px;
             text-align: center;
         }
 
         .running-text {
             background-color: black;
             color: red;
-            font-size: 24px;
+            font-size: 2.5vw;
             font-weight: bold;
-            padding: 15px 0;
-            /* Memberikan ruang vertikal yang cukup */
-            margin-top: 20px;
+            padding: 50px 0;
+            margin-top: 40px;
             text-align: center;
-            border-radius: 5px;
+            border-radius: 10px;
             overflow: hidden;
             white-space: nowrap;
             position: relative;
             width: 100%;
-            height: 40px;
-            /* Tambahkan tinggi agar teks terlihat */
+            height: 50px;
             display: flex;
             align-items: center;
         }
@@ -128,7 +139,7 @@
             display: inline-block;
             position: absolute;
             left: 100%;
-            animation: marquee 10s linear infinite;
+            animation: marquee 12s linear infinite;
         }
 
         @keyframes marquee {
@@ -227,19 +238,19 @@
     // }, 20000);
 </script>
 <script>
-    function autoScale() {
+    function adjustScale() {
+        const container = document.querySelector('.container');
         const wrapper = document.querySelector('.wrapper');
-        const widthScale = window.innerWidth / wrapper.offsetWidth;
-        const heightScale = window.innerHeight / wrapper.offsetHeight;
 
-        // Gunakan skala terkecil agar tidak ada yang keluar layar
-        const scaleFactor = Math.min(widthScale, heightScale);
+        let scaleX = window.innerWidth / container.offsetWidth;
+        let scaleY = window.innerHeight / container.offsetHeight;
+        let scaleFactor = Math.min(scaleX, scaleY);
 
-        wrapper.style.transform = `scale(${scaleFactor})`;
+        container.style.transform = `scale(${scaleFactor})`;
     }
 
-    window.addEventListener('resize', autoScale);
-    window.addEventListener('load', autoScale);
+    window.addEventListener('resize', adjustScale);
+    window.addEventListener('load', adjustScale);
 </script>
 
 <script>
