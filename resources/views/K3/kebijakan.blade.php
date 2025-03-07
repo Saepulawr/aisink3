@@ -36,12 +36,15 @@
             color: white;
             text-align: center;
             padding: 15px;
-            font-size: 24px;
+            font-size: 2vw;
             font-weight: bold;
         }
 
         .container {
-            max-width: 900px;
+            width: 100vw;
+            height: 100vh;
+            max-width: 3840px;
+            max-height: 2160px;
             margin: 20px auto;
             padding: 20px;
             border: 1px solid #ccc;
@@ -56,16 +59,20 @@
         }
 
         .logo img {
-            height: 50px;
+            height: 5vw;
         }
 
         .content {
             text-align: justify;
         }
 
+        p {
+            font-size: 1.6vw
+        }
+
         .acronym {
             font-weight: bold;
-            font-size: 18px;
+            font-size: 2vw;
             color: #d9534f;
         }
     </style>
@@ -77,8 +84,7 @@
             <div class="logo" style="background: #003f87">
                 <img src="assets/logo-with-bg.jpeg" alt="Aisin Logo" />
                 <div class="header">KEBIJAKAN MANAJEMEN</div>
-                <img src="assets/logo-collaborate-with-bg.jpeg" alt="Aisin Collaboration Innovation"
-                    style="height: 40px" />
+                <img src="assets/logo-collaborate-with-bg.jpeg" alt="Aisin Collaboration Innovation" style="" />
             </div>
 
             <div class="content">
@@ -146,7 +152,7 @@
 
 <script>
     setTimeout(() => {
-        window.location.assign("{{ route('dashboard') }}");
+        // window.location.assign("{{ route('dashboard') }}");
     }, 20000); // 20 detik
 </script>
 
